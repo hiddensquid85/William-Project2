@@ -27,8 +27,8 @@ const ModelTable: React.FC<tableProp> = ({ modeller }) => {
       </thead>
       <tbody>
       
-      {modeller.map((item) => (
-          <tr key={1}>
+      {modeller.map((item,index) => (
+          <tr key={index}>
             
             <td  style={{
                 border: "1px solid black",

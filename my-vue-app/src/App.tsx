@@ -5,11 +5,6 @@ import { useState,useEffect } from "react";
 
 function App() {
   
-  const modellerData = [
-    {Name: "CR90 corvette", Model: "CR90 corvette", Manufacturer: "Corellian Engineering Corporation"},
-    {Name: "Star Destroyer", Model: "Imperial I-class Star Destroyer", Manufacturer: "Kuat Drive Yards"},
-    {Name: "Millennium Falcon", Model: "YT-1300 light freighter", Manufacturer: "Corellian Engineering Corporation"},
-  ]
 
   const initialModeller: Modeller[] = [
     { Name: 'Falcon 1', Model: 'F1', Manufacturer: 'SpaceX' },
@@ -32,6 +27,9 @@ function App() {
         Manufacturer: ship.manufacturer,
       }));
 
+     
+
+
       return starships;
     } catch (error) {
       console.error('Error fetching starships:', error);
@@ -43,14 +41,16 @@ function App() {
     const fetchData = async () => {
       try {
         const modellerData = await fetchStarships();
-        console.log("starship",modellerData);
+
+        if(Array.isArray(modellerData))
+          console.log("isarray");
+
+       // console.log("starship",modellerData);
         
 
         // Update the state with the new data while preserving the previous state
-        setTableProp((prevTableProp) => ({
-          ...prevTableProp,
-          modellerData, // Update with new modeller data
-        }));
+
+        setTableProp(prevState => [...prevState, ...modellerData]);
         
       } catch (error) {
         console.error('Error fetching data:', error);
