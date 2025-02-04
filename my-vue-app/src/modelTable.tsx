@@ -1,16 +1,19 @@
 import React from "react";
 
-interface Modeller {
+
+export interface Modeller {
   Name: String
   Model: string
   Manufacturer: string
 
 }
 
-interface tableProp {
+export interface tableProp {
   modeller: Modeller[];
 
 }
+
+
 
 const ModelTable: React.FC<tableProp> = ({ modeller }) => {
   return (
@@ -23,8 +26,9 @@ const ModelTable: React.FC<tableProp> = ({ modeller }) => {
         </tr>
       </thead>
       <tbody>
-      {modeller.map((item, rowindex) => (
-          <tr key={rowindex}>
+      
+      {modeller.map((item) => (
+          <tr key={1}>
             
             <td  style={{
                 border: "1px solid black",
