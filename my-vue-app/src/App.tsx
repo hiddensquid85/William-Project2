@@ -42,15 +42,14 @@ function App() {
       try {
         const modellerData = await fetchStarships();
 
-        if(Array.isArray(modellerData))
-          console.log("isarray");
+          console.log("anropa fetch data");
 
        // console.log("starship",modellerData);
         
 
         // Update the state with the new data while preserving the previous state
 
-        setTableProp(prevState => [...prevState, ...modellerData]);
+         setTableProp(prevState => [...prevState, ...modellerData]);
         
       } catch (error) {
         console.error('Error fetching data:', error);
