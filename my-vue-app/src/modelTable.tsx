@@ -1,17 +1,18 @@
-import React from "react";
-import './assets/modelTable.css'
-import { useState } from "react";
-import { tableProp } from "./commontypes";
+import React, { useContext } from "react";
+import './modelTable.css'
+import { Modeller } from "./commontypes";
+import { StarShipContext } from './App'
 
 
-const ModelTable: React.FC<tableProp> = ({ modeller }) => {
-  const [selectedStarship, setStarship] = useState<number>(0);
+interface ModelTableProp {
+  modeller : Modeller[];
+  setSelectedStarShip:(starship:Modeller) => void;
+}
 
-  const handleRowClick =  (index : number) => {
-    setStarship(index)
-  };
+const ModelTable: React.FC<ModelTableProp> = ({ modeller, setSelectedStarShip}) => {
+  const  selectedStarShip = useContext(StarShipContext);
 
-
+  
   return (
     <table className="table">
       <thead>
@@ -25,8 +26,8 @@ const ModelTable: React.FC<tableProp> = ({ modeller }) => {
       
       {modeller.map((item,index) => (
           <tr key={index} 
-          onClick={() => handleRowClick (index)} 
-          className={selectedStarship === index? "highlighted" : ""}
+          onClick={() => setSelectedStarShip (item)} 
+          className={selectedStarShip?.Name === item.Name? "highlighted" : ""}
            >
             
             <td>{item.Name}</td>
@@ -36,9 +37,7 @@ const ModelTable: React.FC<tableProp> = ({ modeller }) => {
             <td>{item.Manufacturer}</td>
           </tr>
         ))}
-        <tr>
-          <td>selected Star Ship {selectedStarship}</td>
-        </tr>
+
       </tbody>
     </table>
   )

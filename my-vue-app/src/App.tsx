@@ -1,10 +1,12 @@
 
 import { Modeller } from "./commontypes";
-
 import axios from 'axios';
-import { useState,useEffect } from "react";
+import { useState,useEffect, createContext } from "react";
 import ModelTable from "./modelTable";
+import ModelDetail from "./ModelDetail";
 
+
+export const StarShipContext = createContext<Modeller | null> (null);
 
 function App() {
   
@@ -18,6 +20,7 @@ function App() {
 
 
   const [tableProp, setTableProp] = useState<Modeller[]>(initialModeller);
+  const [selectedStarship, setSelectedStarship] = useState<Modeller | null>(null);
 
 
   
@@ -61,17 +64,15 @@ function App() {
 
     fetchData();
   }, []);
-  
+   
   return (
-
+    <StarShipContext.Provider value={selectedStarship}>
     <div style={{ padding: "20px" }}>
       <h1>Model Collection</h1>
-      <ModelTable modeller={tableProp}   />
+      <ModelTable modeller={tableProp} setSelectedStarShip ={setSelectedStarship}   />
+      <ModelDetail/>
     </div>
-
-
-    
-
+    </StarShipContext.Provider>
     );
 }
 export default App;
