@@ -1,6 +1,9 @@
-import ModelTable, {Modeller,tableProp} from "./modelTable";
+
+import { Modeller } from "./commontypes";
+
 import axios from 'axios';
 import { useState,useEffect } from "react";
+import ModelTable from "./modelTable";
 
 
 function App() {

@@ -1,22 +1,7 @@
 import React from "react";
 import './assets/modelTable.css'
 import { useState } from "react";
-
-export interface Modeller {
-  Name: string
-  Model: string
-  Manufacturer: string
-
-}
-
-export interface tableProp {
-  modeller: Modeller[];
-
-}
-
-
-
-
+import { tableProp } from "./commontypes";
 
 
 const ModelTable: React.FC<tableProp> = ({ modeller }) => {
