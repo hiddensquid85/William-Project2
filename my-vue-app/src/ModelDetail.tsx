@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import { StarShipContext } from "./App";
+import React from "react";
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
 
 const ModelDetail: React.FC = () => {
-  const selectedStarship = useContext(StarShipContext);
+  const selectedStarship = useSelector((state: RootState) => state.starship.selectedStarship);
 
   if (!selectedStarship) {
     return <div>Select a starship to see the details</div>;
