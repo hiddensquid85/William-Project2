@@ -1,28 +1,43 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Modeller } from "./commontypes";
+import { Characters, Film, Modeller, Planets } from "./commontypes";
 
 interface StarShipState {
-    selectedStarship: Modeller | null;
     starships: Modeller[];
+    planets: Planets[];
+    characters: Characters[];
+    films: Film[];
+    selectedStarship: Modeller | Planets | Characters | Film | null;
 }
 
 const initialState: StarShipState = {
-    selectedStarship: null,
     starships: [],
+    planets: [],
+    characters: [],
+    films: [],
+    selectedStarship: null,
   };
 
-const starShipSlice = createSlice({
+  const starShipSlice = createSlice({
     name: 'starship',
     initialState,
     reducers: {
-        setSelectedStarship: (state, action:PayloadAction<Modeller>) => {
-            state.selectedStarship = action.payload;
-        },
-        setStarship: (state, action:PayloadAction<Modeller[]>) => {
-            state.starships = action.payload;
-        },    
+      setSelectedStarship: (state, action: PayloadAction<Modeller | Planets | Characters | Film>) => {
+        state.selectedStarship = action.payload;
+      },
+      setStarship: (state, action: PayloadAction<Modeller[]>) => {
+        state.starships = action.payload;
+      },
+      setPlanets: (state, action: PayloadAction<Planets[]>) => {
+        state.planets = action.payload;
+      },
+      setCharacters: (state, action: PayloadAction<Characters[]>) => {
+        state.characters = action.payload;
+      },
+      setFilms: (state, action: PayloadAction<Film[]>) => {
+        state.films = action.payload;
+      },
     },
-});
+  });
 
-export const {setSelectedStarship, setStarship} = starShipSlice.actions;
+  export const { setSelectedStarship, setStarship, setPlanets, setCharacters, setFilms } = starShipSlice.actions;
 export default starShipSlice.reducer;
