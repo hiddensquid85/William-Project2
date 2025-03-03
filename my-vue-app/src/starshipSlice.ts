@@ -6,10 +6,10 @@ interface StarShipState {
     planets: Planets[];
     characters: Characters[];
     films: Film[];
-    selectedStarship: Modeller | Planets | Characters | Film | null;
-}
-
-const initialState: StarShipState = {
+    selectedStarship: Modeller | Planets | Characters | Film | null; // Ensure Film is included
+  }
+  
+  const initialState: StarShipState = {
     starships: [],
     planets: [],
     characters: [],

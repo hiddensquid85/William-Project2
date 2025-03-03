@@ -6,7 +6,7 @@ import { setSelectedStarship } from './starshipSlice';
 import { RootState } from './store';
 
 interface ModelTableProp {
-  modeller: (Modeller | Planets | Characters | Film)[]; // Film is used here
+  modeller: (Modeller | Planets | Characters | Film)[]; // Film is included
 }
 
 const ModelTable: React.FC<ModelTableProp> = ({ modeller }) => {
@@ -27,11 +27,17 @@ const ModelTable: React.FC<ModelTableProp> = ({ modeller }) => {
           const displayName = 'Name' in item ? item.Name : 'Title' in item ? item.Title : 'N/A';
 
           return (
-            <tr
-              key={index}
-              onClick={() => dispatch(setSelectedStarship(item))}
-              className={selectedStarship && 'Name' in selectedStarship && selectedStarship.Name === displayName ? "highlighted" : ""}
-            >
+<tr
+  key={index}
+  onClick={() => dispatch(setSelectedStarship(item))}
+  className={
+    selectedStarship &&
+    (('Name' in selectedStarship && selectedStarship.Name === displayName) ||
+      ('Title' in selectedStarship && selectedStarship.Title === displayName))
+      ? "highlighted"
+      : ""
+  }
+>
               <td>{displayName}</td>
               <td>
                 {'Model' in item && <span>Model: {item.Model}</span>}
