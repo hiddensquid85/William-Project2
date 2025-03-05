@@ -1,11 +1,14 @@
+// App.tsx
 import { useEffect } from "react";
-import axios from 'axios';
+import axiosInstance from './axiosInstance';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStarship, setPlanets, setCharacters, setFilms } from './starshipSlice';
 import { RootState } from './store';
 import ModelTable from "./modelTable";
 import ModelDetail from "./ModelDetail";
 import { Characters, Film, Modeller, Planets } from "./commontypes";
+import { useProgress } from './ProgressContext';
+import ProgressBar from './ProgressBar';
 
 function App() {
   const dispatch = useDispatch();
@@ -13,6 +16,7 @@ function App() {
   const planets = useSelector((state: RootState) => state.starship.planets);
   const characters = useSelector((state: RootState) => state.starship.characters);
   const films = useSelector((state: RootState) => state.starship.films);
+  const { progress, setProgress } = useProgress();
 
   const initialModeller: Modeller[] = [
     { Name: 'Falcon 1', Model: 'F1', Manufacturer: 'SpaceX' },
@@ -21,7 +25,14 @@ function App() {
 
   async function fetchStarships(): Promise<Modeller[]> {
     try {
-      const response = await axios.get('https://swapi-api.hbtn.io/api/starships/');
+      const response = await axiosInstance.get('https://swapi-api.hbtn.io/api/starships/', {
+        onDownloadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          if (total) {
+            setProgress(Math.round((loaded * 100) / total));
+          }
+        },
+      });
       return response.data.results.map((ship: any) => ({
         Name: ship.name,
         Model: ship.model,
@@ -35,7 +46,14 @@ function App() {
 
   async function fetchPlanets(): Promise<Planets[]> {
     try {
-      const response = await axios.get('https://swapi.dev/api/planets/');
+      const response = await axiosInstance.get('https://swapi.dev/api/planets/', {
+        onDownloadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          if (total) {
+            setProgress(Math.round((loaded * 100) / total));
+          }
+        },
+      });
       return response.data.results.map((planet: any) => ({
         Name: planet.name,
         System: planet.climate,
@@ -48,7 +66,14 @@ function App() {
 
   async function fetchCharacters(): Promise<Characters[]> {
     try {
-      const response = await axios.get('https://swapi.dev/api/people/');
+      const response = await axiosInstance.get('https://swapi.dev/api/people/', {
+        onDownloadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          if (total) {
+            setProgress(Math.round((loaded * 100) / total));
+          }
+        },
+      });
       return response.data.results.map((character: any) => ({
         Name: character.name,
         Age: character.birth_year,
@@ -62,7 +87,14 @@ function App() {
 
   async function fetchFilms(): Promise<Film[]> {
     try {
-      const response = await axios.get('https://swapi.dev/api/films/');
+      const response = await axiosInstance.get('https://swapi.dev/api/films/', {
+        onDownloadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          if (total) {
+            setProgress(Math.round((loaded * 100) / total));
+          }
+        },
+      });
       return response.data.results.map((film: any) => ({
         Title: film.title,
         Director: film.director,
@@ -89,15 +121,18 @@ function App() {
         dispatch(setFilms(filmsData));
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
+        setProgress(100); // Set progress to 100% when all data is fetched
       }
     };
 
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, setProgress]);
 
   return (
     <div style={{ padding: "20px" }}>
       <h1>Star Wars Universe</h1>
+      {progress < 100 && <ProgressBar progress={progress} />}
 
       <div style={{ display: "flex", gap: "20px" }}>
         {/* Films Section */}
