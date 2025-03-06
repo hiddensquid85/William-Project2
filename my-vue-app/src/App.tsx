@@ -64,7 +64,7 @@ function App() {
     }
   }
 
-  async function fetchCharacters(): Promise<Characters[]> {
+/*   async function fetchCharacters(): Promise<Characters[]> {
     try {
       const response = await axiosInstance.get('https://swapi.dev/api/people/', {
         onDownloadProgress: (progressEvent) => {
@@ -83,7 +83,7 @@ function App() {
       console.error('Error fetching characters:', error);
       return [];
     }
-  }
+  } */
 
   async function fetchFilms(): Promise<Film[]> {
     try {
@@ -95,11 +95,12 @@ function App() {
           }
         },
       });
-      return response.data.results.map((film: any) => ({
-        Title: film.title,
-        Director: film.director,
-      }));
-    } catch (error) {
+      
+      const data: Film[] = await response.data.results as Film[];
+
+      return data;
+    }
+     catch (error) {
       console.error('Error fetching films:', error);
       return [];
     }
@@ -108,16 +109,18 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [starshipData, planetsData, charactersData, filmsData] = await Promise.all([
-          fetchStarships(),
-          fetchPlanets(),
-          fetchCharacters(),
-          fetchFilms(),
-        ]);
+       /*  const [starshipData, planetsData, charactersData, filmsData] = await Promise.all([
+        //  fetchStarships(),
+         // fetchPlanets(),
+       //   fetchCharacters(),
+          fetchFilms()
+        ]); */
 
-        dispatch(setStarship([...initialModeller, ...starshipData]));
-        dispatch(setPlanets(planetsData));
-        dispatch(setCharacters(charactersData));
+      var filmsData=  await fetchFilms();
+
+       // dispatch(setStarship([...initialModeller, ...starshipData]));
+      //  dispatch(setPlanets(planetsData));
+     //   dispatch(setCharacters(charactersData));
         dispatch(setFilms(filmsData));
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -138,7 +141,7 @@ function App() {
         {/* Films Section */}
         <div style={{ flex: 1 }}>
           <h2>Films</h2>
-          <ModelTable modeller={films} />
+          {films && <ModelTable modeller={films} />}
         </div>
 
         {/* Characters Section */}
