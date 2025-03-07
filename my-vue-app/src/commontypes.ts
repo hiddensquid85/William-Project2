@@ -17,14 +17,22 @@ export interface Characters {
 }
 
 export interface Planets {
-  Name: string
-  System: string;
+  Name: string;
+  diameter: string;
+  rotation_period: string;
+  orbital_period: string;
+  gravity: string;
+  population: string;
+  climate: string;
+  terrain: string;
+  surface_water: string;
+  residents: string[];
+  films: string[];
+  url: string;
+  created: string;
+  edited: string;
 }
 
-/* export interface Film {
-  Title: string;
-  Director: string;
-} */
 
 export interface Film {
   title: string;

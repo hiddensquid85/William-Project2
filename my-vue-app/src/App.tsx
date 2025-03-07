@@ -64,26 +64,6 @@ function App() {
     }
   }
 
-/*   async function fetchCharacters(): Promise<Characters[]> {
-    try {
-      const response = await axiosInstance.get('https://swapi.dev/api/people/', {
-        onDownloadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          if (total) {
-            setProgress(Math.round((loaded * 100) / total));
-          }
-        },
-      });
-      return response.data.results.map((character: any) => ({
-        Name: character.name,
-        Age: character.birth_year,
-        LightSaber: character.skin_color,
-      }));
-    } catch (error) {
-      console.error('Error fetching characters:', error);
-      return [];
-    }
-  } */
 
   async function fetchFilms(): Promise<Film[]> {
     try {
@@ -109,23 +89,16 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-       /*  const [starshipData, planetsData, charactersData, filmsData] = await Promise.all([
-        //  fetchStarships(),
-         // fetchPlanets(),
-       //   fetchCharacters(),
-          fetchFilms()
-        ]); */
+
 
       var filmsData=  await fetchFilms();
 
-       // dispatch(setStarship([...initialModeller, ...starshipData]));
-      //  dispatch(setPlanets(planetsData));
-     //   dispatch(setCharacters(charactersData));
+
         dispatch(setFilms(filmsData));
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setProgress(100); // Set progress to 100% when all data is fetched
+        setProgress(100); 
       }
     };
 

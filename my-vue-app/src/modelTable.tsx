@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import './modelTable.css';
 import { Characters, Film, Modeller, Planets } from "./commontypes";
 import { useDispatch, useSelector } from 'react-redux';
-import {  setSelectedStarWars, setSelectedFilm, setCharacters} from './starshipSlice';
+import {  setSelectedStarWars, setSelectedFilm, setCharacters, setPlanets} from './starshipSlice';
 import { RootState } from './store';
 import axiosInstance from "./axiosInstance";
 
@@ -31,20 +31,7 @@ const ModelTable: React.FC<ModelTableProp> = ({ modeller }) => {
   const dispatch = useDispatch();
   const selectedStarWars = useSelector((state: RootState) => state.starship.selectedStarWars);
 
- // const selectedfilm = useSelector((state: RootState) => state.starship.selectedFilm);
 
-/*   var selectedStarship2=isModeller(selectedStarship); */
-
-/* if (isModeller(selectedStarship))
-  selectedStarship as Modeller; 
-else if (isPlanets(selectedStarship))
-  selectedStarship as Planets;
-else if (isCharacters(selectedStarship))
-  selectedStarship as Characters;
-else if (isFilm(selectedStarship))
-  selectedStarship as Film;
-
- */
 async function fetchCharacters(Characters:string[]): Promise<Characters[]> {
   try {
 
@@ -64,6 +51,34 @@ async function fetchCharacters(Characters:string[]): Promise<Characters[]> {
   }
 }
 
+async function fetchPlanets(Planets:string[]): Promise<Planets[]> {
+  try {
+    const PlanetsPromises = Planets.map(url =>
+      axiosInstance.get(url).then(response => ({
+        Name: response.data.name,
+        System: response.data.climate, // Map climate to System
+        diameter: response.data.diameter,
+        rotation_period: response.data.rotation_period,
+        orbital_period: response.data.orbital_period,
+        gravity: response.data.gravity,
+        population: response.data.population,
+        climate: response.data.climate,
+        terrain: response.data.terrain,
+        surface_water: response.data.surface_water,
+        residents: response.data.residents,
+        films: response.data.films,
+        url: response.data.url,
+        created: response.data.created,
+        edited: response.data.edited,
+          }))
+    );
+    const planets = await Promise.all(PlanetsPromises);
+    return planets;
+  } catch (error) {
+    console.error('Error fetching characters:', error);
+    return [];
+  }
+}
 
 
 useEffect(() => {
@@ -72,11 +87,16 @@ useEffect(() => {
 
       const data = selectedStarWars?.characters ? await fetchCharacters(selectedStarWars.characters) : [];
       dispatch(setCharacters(data));
+
+      const data2 = selectedStarWars?.planets ? await fetchPlanets(selectedStarWars.characters) : [];
+      dispatch(setPlanets(data2));
+
+      
     }
   };
 
   fetchData();
-}, [selectedStarWars]);
+}, [selectedStarWars, dispatch]);
 
 
 
