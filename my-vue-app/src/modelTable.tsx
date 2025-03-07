@@ -16,7 +16,7 @@ function isModeller(item: any): item is Modeller {
 }
 
 function isPlanets(item: any): item is Planets {
-  return (item as Planets).System !== undefined;
+  return (item as Planets).rotation_period !== undefined;
 }
 
 function isCharacters(item: any): item is Characters {
@@ -88,7 +88,7 @@ useEffect(() => {
       const data = selectedStarWars?.characters ? await fetchCharacters(selectedStarWars.characters) : [];
       dispatch(setCharacters(data));
 
-      const data2 = selectedStarWars?.planets ? await fetchPlanets(selectedStarWars.characters) : [];
+      const data2 = selectedStarWars?.planets ? await fetchPlanets(selectedStarWars.planets) : [];
       dispatch(setPlanets(data2));
 
       
@@ -136,7 +136,7 @@ useEffect(() => {
               >
                 <td>{item.Name}</td>
                 <td>
-                  <span>System: {item.System}</span>
+                  <span>{item.climate}</span>
                 </td>
               </tr>
             );

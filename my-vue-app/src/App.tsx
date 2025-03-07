@@ -44,25 +44,7 @@ function App() {
     }
   }
 
-  async function fetchPlanets(): Promise<Planets[]> {
-    try {
-      const response = await axiosInstance.get('https://swapi.dev/api/planets/', {
-        onDownloadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          if (total) {
-            setProgress(Math.round((loaded * 100) / total));
-          }
-        },
-      });
-      return response.data.results.map((planet: any) => ({
-        Name: planet.name,
-        System: planet.climate,
-      }));
-    } catch (error) {
-      console.error('Error fetching planets:', error);
-      return [];
-    }
-  }
+ 
 
 
   async function fetchFilms(): Promise<Film[]> {
