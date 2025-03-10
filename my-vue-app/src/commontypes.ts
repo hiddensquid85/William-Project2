@@ -10,13 +10,25 @@ export interface tableProp {
 
 }
 
+export interface BaseEntity {
+  id: number;
+  name: string;
+}
+
 export interface Characters {
-  Name: string;
-  Age: number;
-  LightSaber: string;
+  type: "Characters";
+  height: string;
+  mass: string;
+  hair_color: string;
+  skin_color: string;
+  eye_color: string;
+  birth_year: string;
+  gender: string;
+  homeworld: string;
 }
 
 export interface Planets {
+  type: "Planets";
   Name: string;
   diameter: string;
   rotation_period: string;
@@ -35,6 +47,7 @@ export interface Planets {
 
 
 export interface Film {
+  type: "Film";
   title: string;
   episode_id: number;
   opening_crawl: string;
@@ -50,3 +63,5 @@ export interface Film {
   edited: string;
   url: string;
 }
+
+ export type StarWatsEntity = Characters | Film
