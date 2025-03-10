@@ -11,85 +11,47 @@ interface ModelTableProp {
 }
 
 // Type guards
-//function isModeller(item: any): item is Modeller {
- // return (item as Modeller).Model !== undefined;
-//}
+function isModeller(item: any): item is Modeller {
+  return (item as Modeller).Model !== undefined;
+}
 
-//function isPlanets(item: any): item is Planets {
- // return (item as Planets).rotation_period !== undefined;
-//}
+function isPlanets(item: any): item is Planets {
+  return (item as Planets).rotation_period !== undefined;
+}
 
-//function isCharacters(item: any): item is Characters {
-  //return (item as Characters).Age !== undefined;
-//}
+function isCharacters(item: any): item is Characters {
+  return (item as Characters).gender !== undefined;
+}
 
-//function isFilm(item: any): item is Film {
-  //return (item as Film).producer !== undefined;
-//}
+function isFilm(item: any): item is Film {
+  return (item as Film).producer !== undefined;
+}
 
 const ModelTable: React.FC<ModelTableProp> = ({ modeller }) => {
   const dispatch = useDispatch();
   const selectedStarWars = useSelector((state: RootState) => state.starship.selectedStarWars);
 
 
-  async function fetchFilms(Films:string[]): Promise<Film[]> {
+
+
+  async function fetchCharacters(urls: string[]): Promise<Characters[]> {
     try {
-  
-  
-      const filmPromises = Films.map(url =>
-        axiosInstance.get(url).then(response => ({
-          type: "Film" as const,
-          title: response.data.title,
-          episode_id: response.data.episode_id,
-          opening_crawl: response.data.opening_crawl,
-          director: response.data.director,
-          producer: response.data.producer,
-          release_date: response.data.release_date,
-          characters: response.data.characters,
-          planets: response.data.planets,
-          starships: response.data.starships,
-          vehicles: response.data.vehicles,
-          species: response.data.species,
-          created: response.data.created,
-          edited: response.data.edited,
-          url: response.data.url,
-        }))
-      );
-      const films = await Promise.all(filmPromises);
-      
-      return Films;
+      const characterPromises = urls.map(async (url) => {
+        const response = await axiosInstance.get(url);
+     
+        return  response.data as Characters;
+      });
+    
+      const characters = await Promise.all(characterPromises);
+      return characters;
     } catch (error) {
       console.error('Error fetching characters:', error);
       return [];
     }
-
-  async function fetchCharacters(Characters:string[]): Promise<Characters[]> {
-  try {
-
-
-    const characterPromises = Characters.map(url =>
-      axiosInstance.get(url).then(response => ({
-        type: "Characters" as const, // Ensure the type is correctly set
-        height: response.data.height,
-        mass: response.data.mass,
-        hair_color: response.data.hair_color,
-        skin_color: response.data.skin_color,
-        eye_color: response.data.eye_color,
-        birth_year: response.data.birth_year,
-        gender: response.data.gender,
-        homeworld: response.data.homeworld,
-      }))
-    );
-    const characters = await Promise.all(characterPromises);
-    
-    return characters;
-  } catch (error) {
-    console.error('Error fetching characters:', error);
-    return [];
   }
-}
-
-async function fetchPlanets(Planets:string[]): Promise<Planets[]> {
+  
+  
+/* async function fetchPlanets(Planets:string[]): Promise<Planets[]> {
   try {
     const PlanetsPromises = Planets.map(url =>
       axiosInstance.get(url).then(response => ({
@@ -116,7 +78,7 @@ async function fetchPlanets(Planets:string[]): Promise<Planets[]> {
     console.error('Error fetching characters:', error);
     return [];
   }
-}
+} */
 
 
 useEffect(() => {
@@ -126,8 +88,8 @@ useEffect(() => {
       const data = selectedStarWars?.characters ? await fetchCharacters(selectedStarWars.characters) : [];
       dispatch(setCharacters(data));
 
-      const data2 = selectedStarWars?.planets ? await fetchPlanets(selectedStarWars.planets) : [];
-      dispatch(setPlanets(data2));
+    //  const data2 = selectedStarWars?.planets ? await fetchPlanets(selectedStarWars.planets) : [];
+     // dispatch(setPlanets(data2));
 
       
     }
@@ -185,10 +147,10 @@ useEffect(() => {
                 onClick={() => dispatch(setSelectedStarWars(item))}
               /*    className={selectedStarship && selectedStarship.Name === item.Name ? "highlighted" : ""}  */
               >
-                <td>{item.Name}</td>
+                <td>{item.birth_year}</td>
                 <td>
-                  <span>Age: {item.Age}</span>
-                  <span>LightSaber: {item.LightSaber}</span>
+                  <span>Age: {item.hair_color}</span>
+                  <span>LightSaber: {item.type}</span>
                 </td>
               </tr>
             );
