@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import './modelTable.css';
 import { Characters, Film, Modeller, Planets } from "./commontypes";
 import { useDispatch, useSelector } from 'react-redux';
-import {  setSelectedStarWars, setSelectedFilm, setCharacters, setPlanets} from './starshipSlice';
+import {  setSelectedStarWars, setSelectedFilm, setCharacters, setPlanets, setFilms} from './starshipSlice';
 import { RootState } from './store';
 import axiosInstance from "./axiosInstance";
 
@@ -49,6 +49,24 @@ const ModelTable: React.FC<ModelTableProp> = ({ modeller }) => {
       return [];
     }
   }
+
+  async function fetchPlanets(urls: string[]): Promise<Planets[]> {
+    try {
+      const PlanetsPromises = urls.map(async (url) => {
+        const response = await axiosInstance.get(url);
+     
+        return  response.data as Planets;
+      });
+    
+      const planets = await Promise.all(PlanetsPromises);
+      return planets;
+    } catch (error) {
+      console.error('Error fetching characters:', error);
+      return [];
+    }
+  }
+
+
   
   
 /* async function fetchPlanets(Planets:string[]): Promise<Planets[]> {
@@ -87,6 +105,14 @@ useEffect(() => {
 
       const data = selectedStarWars?.characters ? await fetchCharacters(selectedStarWars.characters) : [];
       dispatch(setCharacters(data));
+
+      const data2 = selectedStarWars?.planets ? await fetchPlanets(selectedStarWars.planets) : [];
+      dispatch(setPlanets(data2));
+
+    
+
+
+
 
     //  const data2 = selectedStarWars?.planets ? await fetchPlanets(selectedStarWars.planets) : [];
      // dispatch(setPlanets(data2));
