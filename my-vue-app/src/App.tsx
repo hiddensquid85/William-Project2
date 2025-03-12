@@ -6,9 +6,13 @@ import { setStarship, setPlanets, setCharacters, setFilms } from './starshipSlic
 import { RootState } from './store';
 import ModelTable from "./modelTable";
 import ModelDetail from "./ModelDetail";
-import { Characters, Film, Modeller, Planets } from "./commontypes";
+import { StarWarsEntity, Characters, Film, Planets, Starship } from "./commontypes";
+import StarWarsComponent from "./StarWarsParentComponent";
 import { useProgress } from './ProgressContext';
 import ProgressBar from './ProgressBar';
+import { StarshipComponent, CharacterComponent, FilmComponent, PlanetComponent } from "./StarWarsComponets";
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -96,13 +100,13 @@ function App() {
         {/* Films Section */}
         <div style={{ flex: 1 }}>
           <h2>Films</h2>
-          {films && <ModelTable modeller={films} />}
+          <StarWarsComponent entity={}>
         </div>
 
         {/* Characters Section */}
         <div style={{ flex: 1 }}>
           <h2>Characters</h2>
-          <ModelTable modeller={characters} />
+          <StarWarsComponent entity={}/>
         </div>
       </div>
 
@@ -110,13 +114,13 @@ function App() {
         {/* Planets Section */}
         <div style={{ flex: 1 }}>
           <h2>Planets</h2>
-          <ModelTable modeller={planets} />
+          <StarWarsComponent entity={}/>
         </div>
 
         {/* Starships Section */}
         <div style={{ flex: 1 }}>
           <h2>Starships</h2>
-          <ModelTable modeller={starships} />
+          <StarWarsComponent entity={}/>
         </div>
       </div>
 

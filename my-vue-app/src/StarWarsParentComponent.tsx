@@ -2,8 +2,7 @@ import React from "react";
 import { StarWarsEntity, Characters, Film, Planets, Starship } from "./commontypes";
 import { CharacterComponent, FilmComponent, PlanetComponent, StarshipComponent } from "./StarWarsComponets";
 
-
-const StarWarsComponent: React.FC<{ entity: StarWarsEntity }> = ({ entity }) => {
+const StarWarsParentComponent: React.FC<{ entity: StarWarsEntity }> = ({ entity }) => {
     switch (entity.type) {
       case "Starship":
         return <StarshipComponent entity={entity} />;
@@ -15,3 +14,5 @@ const StarWarsComponent: React.FC<{ entity: StarWarsEntity }> = ({ entity }) => 
         return <div>Unknown entity type</div>;
     }
   };
+
+export default StarWarsParentComponent;
