@@ -64,6 +64,7 @@ function App() {
       });
       
       const data: Film[] = await response.data.results as Film[];
+      data[0].type = "Film";
 
       return data;
     }
@@ -101,7 +102,7 @@ function App() {
         {/* Films Section */}
         <div style={{ flex: 1 }}>
           <h2>Films</h2>
-          {films && <StarWarsParentComponent   type= "Film" data= {films} />}
+          {films && <StarWarsParentComponent entity={films} />}
         </div>
 
         {/* Characters Section */}
