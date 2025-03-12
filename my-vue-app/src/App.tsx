@@ -6,11 +6,12 @@ import { setStarship, setPlanets, setCharacters, setFilms } from './starshipSlic
 import { RootState } from './store';
 import ModelTable from "./modelTable";
 import ModelDetail from "./ModelDetail";
-import { StarWarsEntity, Characters, Film, Planets, Starship } from "./commontypes";
+import { StarWarsEntity, Characters, Film, Planets, Starship, Modeller } from "./commontypes";
 import StarWarsComponent from "./StarWarsParentComponent";
 import { useProgress } from './ProgressContext';
 import ProgressBar from './ProgressBar';
 import { StarshipComponent, CharacterComponent, FilmComponent, PlanetComponent } from "./StarWarsComponets";
+import StarWarsParentComponent from "./StarWarsParentComponent";
 
 
 
@@ -100,13 +101,13 @@ function App() {
         {/* Films Section */}
         <div style={{ flex: 1 }}>
           <h2>Films</h2>
-          <StarWarsComponent entity={}>
+          {films && <StarWarsParentComponent entity={{ type: "Film", data: films } as StarWarsEntity<Film>} />}
         </div>
 
         {/* Characters Section */}
         <div style={{ flex: 1 }}>
           <h2>Characters</h2>
-          <StarWarsComponent entity={}/>
+         {/*  <StarWarsComponent entity={}/> */}
         </div>
       </div>
 
@@ -114,13 +115,13 @@ function App() {
         {/* Planets Section */}
         <div style={{ flex: 1 }}>
           <h2>Planets</h2>
-          <StarWarsComponent entity={}/>
+        {/*   <StarWarsComponent entity={}/> */}
         </div>
 
         {/* Starships Section */}
         <div style={{ flex: 1 }}>
           <h2>Starships</h2>
-          <StarWarsComponent entity={}/>
+       {/*    <StarWarsComponent entity={}/> */}
         </div>
       </div>
 

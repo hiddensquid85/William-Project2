@@ -24,12 +24,49 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
     </div>
   );
 
-  export const FilmComponent: React.FC<{ entity: Film }> = ({ entity }) => (
+  export const FilmComponent: React.FC<{ entity: Film[] }> = ({ entity }) => (
+    <>
+      {entity.map((item: Film, index: number) => (
+        <tr key={index}>
+          <td>{item.title}</td>
+          <td>
+            <span>Director: {item.producer}</span>
+          </td>
+        </tr>
+      ))}
+    </>
+  );
+
+  /*   
+              {entity.map((item, index) => {
+                      
+
+                       /*   const setSelectedFilm = (item: Film) => setSelectedStarWars(item); */
+             
+                       /*   return (
+                           <tr
+                             key={index}
+                             onClick={() => dispatch(setSelectedStarWars(item))}
+                             className={selectedStarWars && isFilm(selectedStarWars) && selectedStarWars.title === item.title ? "highlighted" : ""}
+
+                           >
+                             <td>{item.title}</td>
+                             <td>
+                               <span>Director: {item.producer}</span>
+                             </td>
+                           </tr>
+                         );
+                       } else {
+                         return null; */
+                   /*     } */ 
+                     
+              
+/* 
     <div>
       <h1>Film: {entity.title}</h1>
       <p>Director: {entity.director}</p>
       <p>Producer: {entity.producer}</p>
-    </div>
-  );
+    </div> */
+  
 
  

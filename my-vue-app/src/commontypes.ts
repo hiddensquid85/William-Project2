@@ -11,11 +11,11 @@ export interface tableProp {
 }
 
 export interface BaseEntity {
-  id: number;
-  name: string;
+    type: "Characters" | "Film" | "Planets" | "Starship";
+
 }
 
-export interface Characters {
+export interface Characters extends BaseEntity{
   type: "Characters";
   name: string;
   height: string;
@@ -35,7 +35,7 @@ export interface Characters {
   url: string;
 }
 
-export interface Planets {
+export interface Planets extends BaseEntity {
   type: "Planets";
   Name: string;
   diameter: string;
@@ -54,7 +54,7 @@ export interface Planets {
 }
 
 
-export interface Film {
+export interface Film extends BaseEntity{
   film: any;
   type: "Film";
   title: string;
@@ -73,7 +73,7 @@ export interface Film {
   url: string;
 }
 
-export interface Starship {
+export interface Starship extends BaseEntity {
   type: "Starship"
   name: string;
   model: string;
@@ -94,5 +94,8 @@ export interface Starship {
   edited: string;
   url: string;
 }
+/* type EntityProps = {
+  entity: { type: "Film" | "Characters" | "Planets" | "Starship"; films?: Film[] };
+}; */
 
- export type StarWarsEntity = Characters | Film | Planets | Starship
+export type StarWarsEntity<T> = { type: "Film" | "Characters" | "Planets" | "Starship"; data: T[] };

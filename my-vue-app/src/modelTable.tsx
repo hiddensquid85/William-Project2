@@ -138,49 +138,8 @@ useEffect(() => {
       </thead>
       <tbody>
         {modeller.map((item, index) => {
-          if (isModeller(item)) {
-            return (
-              <tr
-                key={index}
-                onClick={() => dispatch(setSelectedStarWars(item))}
-              /*   className={selectedStarship && selectedStarship.Name === item.Name ? "highlighted" : ""} */
-              >
-                <td>{item.Name}</td>
-                <td>
-                  <span>Model: {item.Model}</span>
-                  <span>Manufacturer: {item.Manufacturer}</span>
-                </td>
-              </tr>
-            );
-          } else if (isPlanets(item)) {
-            return (
-              <tr
-                key={index}
-                onClick={() => dispatch(setSelectedStarWars(item))}
-                className={selectedStarWars && isPlanets(selectedStarWars) && selectedStarWars.Name === item.Name ? "highlighted" : ""}
-
-              >
-                <td>{item.Name}</td>
-                <td>
-                  <span>{item.climate}</span>
-                </td>
-              </tr>
-            );
-          } else if (isCharacters(item)) {
-            return (
-              <tr
-                key={index}
-                onClick={() => dispatch(setSelectedStarWars(item))}
-              /*    className={selectedStarship && selectedStarship.Name === item.Name ? "highlighted" : ""}  */
-              >
-                <td>{item.birth_year}</td>
-                <td>
-                  <span>Age: {item.hair_color}</span>
-                  <span>LightSaber: {item.type}</span>
-                </td>
-              </tr>
-            );
-          } else if (isFilm(item)) {
+         
+        if (isFilm(item)) {
           /*   const setSelectedFilm = (item: Film) => setSelectedStarWars(item); */
 
             return (
