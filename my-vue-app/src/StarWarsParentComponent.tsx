@@ -6,10 +6,10 @@ interface StarWarsParentComponentProps {
   entity: StarWarsEntity;
 }
 
-const StarWarsParentComponent: React.FC<StarWarsParentComponentProps> = ({ entity }) => {
+const StarWarsParentComponent: React.FC<StarWarsEntity> = ( entity ) => {
     switch (entity.type) {
       case "Film":
-        return <FilmComponent entity={entity.data as Film[]} />;
+        return <FilmComponent entity={entity.data} />;
      /*  case "Starship":s
         return <StarshipComponent entity={entity} />;
       case "Planets":

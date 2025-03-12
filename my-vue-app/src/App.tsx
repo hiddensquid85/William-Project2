@@ -101,7 +101,7 @@ function App() {
         {/* Films Section */}
         <div style={{ flex: 1 }}>
           <h2>Films</h2>
-          {films && <StarWarsParentComponent  entity={{ type: "Film", data: films }} />}
+          {films && <StarWarsParentComponent   type= "Film" data= {films} />}
         </div>
 
         {/* Characters Section */}
