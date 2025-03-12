@@ -98,4 +98,8 @@ export interface Starship extends BaseEntity {
   entity: { type: "Film" | "Characters" | "Planets" | "Starship"; films?: Film[] };
 }; */
 
-export type StarWarsEntity<T> = { type: "Film" | "Characters" | "Planets" | "Starship"; data: T[] };
+export type StarWarsEntity = 
+  | { type: "Film"; data: Film[] }
+  | { type: "Characters"; data: Characters[] }
+  | { type: "Planets"; data: Planets[] }
+  | { type: "Starship"; data: Starship[] };

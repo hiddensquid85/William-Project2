@@ -2,11 +2,11 @@ import React from "react";
 import { StarWarsEntity, Characters, Film, Planets, Starship } from "./commontypes";
 import { CharacterComponent, FilmComponent, PlanetComponent, StarshipComponent } from "./StarWarsComponets";
 
-interface StarWarsParentComponentProps<T> {
-  entity: StarWarsEntity<T>;
+interface StarWarsParentComponentProps {
+  entity: StarWarsEntity;
 }
 
-const StarWarsParentComponent = <T extends Film | Characters | Planets | Starship>({ entity }: StarWarsParentComponentProps<T>) => {
+const StarWarsParentComponent: React.FC<StarWarsParentComponentProps> = ({ entity }) => {
     switch (entity.type) {
       case "Film":
         return <FilmComponent entity={entity.data as Film[]} />;
