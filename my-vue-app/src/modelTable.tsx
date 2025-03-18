@@ -10,22 +10,7 @@ interface ModelTableProp {
   modeller: (Modeller | Planets | Characters | Film)[];
 }
 
-// Type guards
-function isModeller(item: any): item is Modeller {
-  return (item as Modeller).Model !== undefined;
-}
 
-function isPlanets(item: any): item is Planets {
-  return (item as Planets).rotation_period !== undefined;
-}
-
-function isCharacters(item: any): item is Characters {
-  return (item as Characters).gender !== undefined;
-}
-
-function isFilm(item: any): item is Film {
-  return (item as Film).producer !== undefined;
-}
 
 const ModelTable: React.FC<ModelTableProp> = ({ modeller }) => {
   const dispatch = useDispatch();
@@ -69,35 +54,6 @@ const ModelTable: React.FC<ModelTableProp> = ({ modeller }) => {
 
   
   
-/* async function fetchPlanets(Planets:string[]): Promise<Planets[]> {
-  try {
-    const PlanetsPromises = Planets.map(url =>
-      axiosInstance.get(url).then(response => ({
-        Name: response.data.name,
-        System: response.data.climate, // Map climate to System
-        diameter: response.data.diameter,
-        rotation_period: response.data.rotation_period,
-        orbital_period: response.data.orbital_period,
-        gravity: response.data.gravity,
-        population: response.data.population,
-        climate: response.data.climate,
-        terrain: response.data.terrain,
-        surface_water: response.data.surface_water,
-        residents: response.data.residents,
-        films: response.data.films,
-        url: response.data.url,
-        created: response.data.created,
-        edited: response.data.edited,
-          }))
-    );
-    const planets = await Promise.all(PlanetsPromises);
-    return planets;
-  } catch (error) {
-    console.error('Error fetching characters:', error);
-    return [];
-  }
-} */
-
 
 useEffect(() => {
   const fetchData = async () => {
@@ -110,13 +66,6 @@ useEffect(() => {
       dispatch(setPlanets(data2));
 
     
-
-
-
-
-    //  const data2 = selectedStarWars?.planets ? await fetchPlanets(selectedStarWars.planets) : [];
-     // dispatch(setPlanets(data2));
-
       
     }
   };

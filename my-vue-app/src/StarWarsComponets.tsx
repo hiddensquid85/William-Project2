@@ -1,5 +1,9 @@
 import React from "react";
 import { Planets,Characters,Film , Starship} from "./commontypes";
+import { useDispatch, UseDispatch,useSelector } from "react-redux";
+import { RootState } from "./store";
+import { setSelectedFilm } from "./starshipSlice";
+import './modelTable.css';
 
 
 export const StarshipComponent: React.FC<{ entity: Starship }> = ({ entity }) => (
@@ -24,18 +28,33 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
     </div>
   );
 
-  export const FilmComponent: React.FC<{ entity: Film[] }> = ({ entity }) => (
-    <>
+  export const FilmComponent: React.FC<{ entity: Film[] }> = ({ entity }) => {
+
+     const dispatch = useDispatch();
+     const selectedStarWars = useSelector((state: RootState) => state.starship.selectedFilm);
+
+
+    const handleOnClick = (film: Film) => {
+      dispatch(setSelectedFilm(film))
+    }
+
+    return(
+    <table>
+      <tbody>
       {entity.map((item: Film, index: number) => (
-        <tr key={index}>
+        <tr key={index} onClick={() => handleOnClick(item)}  className={
+          selectedStarWars && selectedStarWars.title === item.title ? "highlighted" : ""
+        }>
           <td>{item.title}</td>
           <td>
             <span>Director: {item.producer}</span>
           </td>
         </tr>
       ))}
-    </>
+  </tbody>
+</table>
   );
+  };
 
   /*   
               {entity.map((item, index) => {
