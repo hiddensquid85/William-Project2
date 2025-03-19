@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Planets,Characters,Film , Starship} from "./commontypes";
-import { useDispatch, UseDispatch,useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { RootState } from "./store";
 import { setSelectedFilm } from "./starshipSlice";
+import { fetchCharacters } from "./fetchComponets";
 import './modelTable.css';
 
 
@@ -21,12 +22,28 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
     </div>
   );
 
-  export const CharacterComponent: React.FC<{ entity: Characters }> = ({ entity }) => (
-    <div>
-      <h1>Character: {entity.name}</h1>
-      <p>Species: {entity.species}</p>
-    </div>
-  );
+  export const CharacterComponent: React.FC<{ entity: Characters }> = ({ entity }) => {
+    const dispatch = useDispatch();
+    const selectedFilm = useSelector((state: RootState) => state.starship);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        if (selectedFilm) {
+          const data = selectedFilm.characters ? await fetchCharacters(selectedFilm.characters) : [];?
+          dispatch(setCharacters(data));
+        }
+      };
+  
+      fetchData();
+    }, [selectedStarWars, dispatch]);
+  
+    return (
+      <div>
+        <h1>Character: {entity.name}</h1>
+        <p>Species: {entity.species}</p>
+      </div>
+    );
+  };
 
   export const FilmComponent: React.FC<{ entity: Film[] }> = ({ entity }) => {
 

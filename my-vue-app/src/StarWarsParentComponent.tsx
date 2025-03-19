@@ -13,18 +13,18 @@ const StarWarsParentComponent: React.FC<StarWarsParentComponentProps> = ({ entit
   }
   const entityType = entity[0].type;
 
-    switch (entityType) {
-      case "Film":
-        return <FilmComponent entity={entity as Film[]} />;
-     /*  case "Starship":s
-        return <StarshipComponent entity={entity} />;
-      case "Planets":
-        return <PlanetComponent entity={entity} />;
-      case "Characters":
-        return <CharacterComponent entity={entity} />; */
-      default:
-        return <div>Unknown entity type</div>;
-    }
+  switch (entityType) {
+    case "Film":
+      return <FilmComponent entity={entity as Film[]} />;
+   /* case "Starship":
+      return <StarshipComponent entity={entity as Starship} />; */
+  /*  case "Planets":
+      return <PlanetComponent entity={entity as Planets} />; */
+    case "Characters":
+      return <CharacterComponent entity={entity as Characters} />;
+    default:
+      return <div>Unknown entity type</div>;
+  }
   };
 
 export default StarWarsParentComponent;

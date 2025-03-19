@@ -19,7 +19,7 @@ const ModelTable: React.FC<ModelTableProp> = ({ modeller }) => {
 
 
 
-  async function fetchCharacters(urls: string[]): Promise<Characters[]> {
+   async function fetchCharacters(urls: string[]): Promise<Characters[]> {
     try {
       const characterPromises = urls.map(async (url) => {
         const response = await axiosInstance.get(url);
