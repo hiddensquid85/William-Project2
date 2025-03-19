@@ -7,6 +7,7 @@ import { fetchCharacters } from "./fetchComponets";
 import './modelTable.css';
 
 
+
 export const StarshipComponent: React.FC<{ entity: Starship }> = ({ entity }) => (
     <div>
       <h1>Starship: {entity.name}</h1>
@@ -22,7 +23,7 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
     </div>
   );
 
-  export const CharacterComponent: React.FC<{ entity: Characters }> = ({ entity }) => {
+  export const CharacterComponent: React.FC<{ entity: Characters[] }> = ({ entity }) => {
     const dispatch = useDispatch();
     const selectedFilm = useSelector((state: RootState) => state.starship.selectedFilm);
 
@@ -36,20 +37,28 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
       };
   
       fetchData();
-    }, [selectedFilm, dispatch]);
+    }, [selectedFilm]);
   
     return (
-      <div>
-        <h1>Character: {entity.name}</h1>
-        <p>Species: {entity.species}</p>
-      </div>
+      <table>
+      <tbody>
+      {entity.map((item: Characters, index: number) => (
+        <tr key={index}   >
+          <td>Birth year:{item.birth_year}</td>
+          <td>
+            <span>Homeworld: {item.homeworld}</span>
+          </td>
+        </tr>
+      ))}
+  </tbody>
+</table>
     );
   };
 
   export const FilmComponent: React.FC<{ entity: Film[] }> = ({ entity }) => {
 
-     const dispatch = useDispatch();
-     const selectedStarWars = useSelector((state: RootState) => state.starship.selectedFilm);
+    const dispatch = useDispatch();
+const selectedFilm = useSelector((state: RootState) => state.starship.selectedFilm);
 
 
     const handleOnClick = (film: Film) => {
@@ -61,7 +70,7 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
       <tbody>
       {entity.map((item: Film, index: number) => (
         <tr key={index} onClick={() => handleOnClick(item)}  className={
-          selectedStarWars && selectedStarWars.title === item.title ? "highlighted" : ""
+          selectedFilm && selectedFilm.title === item.title ? "highlighted" : ""
         }>
           <td>{item.title}</td>
           <td>

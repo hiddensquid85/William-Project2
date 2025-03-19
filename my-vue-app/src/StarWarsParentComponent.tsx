@@ -21,7 +21,7 @@ const StarWarsParentComponent: React.FC<StarWarsParentComponentProps> = ({ entit
   /*  case "Planets":
       return <PlanetComponent entity={entity as Planets} />; */
     case "Characters":
-      return <CharacterComponent entity={entity as Characters} />;
+      return <CharacterComponent entity={entity as Characters[]} />;
     default:
       return <div>Unknown entity type</div>;
   }

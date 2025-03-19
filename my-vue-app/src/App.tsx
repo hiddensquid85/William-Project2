@@ -4,7 +4,6 @@ import axiosInstance from './axiosInstance';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStarship, setPlanets, setCharacters, setFilms } from './starshipSlice';
 import { RootState } from './store';
-import ModelTable from "./modelTable";
 import ModelDetail from "./ModelDetail";
 import { StarWarsEntity, Characters, Film, Planets, Starship, Modeller } from "./commontypes";
 import StarWarsComponent from "./StarWarsParentComponent";
@@ -55,12 +54,7 @@ function App() {
   async function fetchFilms(): Promise<Film[]> {
     try {
       const response = await axiosInstance.get('https://swapi.dev/api/films/', {
-        onDownloadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          if (total) {
-            setProgress(Math.round((loaded * 100) / total));
-          }
-        },
+
       });
       
       const data: Film[] = await response.data.results as Film[];
@@ -91,7 +85,7 @@ function App() {
     };
 
     fetchData();
-  }, [dispatch, setProgress]);
+  }, []);
 
   return (
     <div style={{ padding: "20px" }}>

@@ -12,50 +12,10 @@ interface ModelTableProp {
 
 
 
-const ModelTable: React.FC<ModelTableProp> = ({ modeller }) => {
-  const dispatch = useDispatch();
-  const selectedStarWars = useSelector((state: RootState) => state.starship.selectedStarWars);
-
-
-
-
-   async function fetchCharacters(urls: string[]): Promise<Characters[]> {
-    try {
-      const characterPromises = urls.map(async (url) => {
-        const response = await axiosInstance.get(url);
-     
-        return  response.data as Characters;
-      });
-    
-      const characters = await Promise.all(characterPromises);
-      return characters;
-    } catch (error) {
-      console.error('Error fetching characters:', error);
-      return [];
-    }
-  }
-
-  async function fetchPlanets(urls: string[]): Promise<Planets[]> {
-    try {
-      const PlanetsPromises = urls.map(async (url) => {
-        const response = await axiosInstance.get(url);
-     
-        return  response.data as Planets;
-      });
-    
-      const planets = await Promise.all(PlanetsPromises);
-      return planets;
-    } catch (error) {
-      console.error('Error fetching characters:', error);
-      return [];
-    }
-  }
-
 
   
-  
 
-useEffect(() => {
+/* useEffect(() => {
   const fetchData = async () => {
     if (selectedStarWars && isFilm(selectedStarWars)) {
 
@@ -71,13 +31,13 @@ useEffect(() => {
   };
 
   fetchData();
-}, [selectedStarWars, dispatch]);
+}, [selectedStarWars, dispatch]); */
 
 
 
 
 
-  return (
+  /* return (
     <table className="table">
       <thead>
         <tr>
@@ -91,30 +51,28 @@ useEffect(() => {
         if (isFilm(item)) {
           /*   const setSelectedFilm = (item: Film) => setSelectedStarWars(item); */
 
-            return (
-              <tr
-                key={index}
-                onClick={() => dispatch(setSelectedStarWars(item))}
-                className={selectedStarWars && isFilm(selectedStarWars) && selectedStarWars.title === item.title ? "highlighted" : ""}
+//             return (
+//               <tr
+//                 key={index}
+//                 onClick={() => dispatch(setSelectedStarWars(item))}
+//                 className={selectedStarWars && isFilm(selectedStarWars) && selectedStarWars.title === item.title ? "highlighted" : ""}
 
-              >
-                <td>{item.title}</td>
-                <td>
-                  <span>Director: {item.producer}</span>
-                </td>
-              </tr>
-            );
-          } else {
-            return null;
-          }
-        })}
-      </tbody>
-    </table>
-  );
-};
+//               >
+//                 <td>{item.title}</td>
+//                 <td>
+//                   <span>Director: {item.producer}</span>
+//                 </td>
+//               </tr>
+//             );
+//           } else {
+//             return null;
+//           }
+//         })}
+//       </tbody>
+//     </table>
+//   );
+// }; */
 
-export default ModelTable;
 
-function setProgress(arg0: number) {
- // throw new Error("Function not implemented.");
-}
+
+
