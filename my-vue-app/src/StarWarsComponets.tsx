@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Planets,Characters,Film , Starship} from "./commontypes";
 import { useDispatch,useSelector } from "react-redux";
 import { RootState } from "./store";
-import { setSelectedFilm } from "./starshipSlice";
+import { setCharacters, setSelectedFilm } from "./starshipSlice";
 import { fetchCharacters } from "./fetchComponets";
 import './modelTable.css';
 
@@ -24,18 +24,19 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
 
   export const CharacterComponent: React.FC<{ entity: Characters }> = ({ entity }) => {
     const dispatch = useDispatch();
-    const selectedFilm = useSelector((state: RootState) => state.starship);
+    const selectedFilm = useSelector((state: RootState) => state.starship.selectedFilm);
 
     useEffect(() => {
       const fetchData = async () => {
         if (selectedFilm) {
-          const data = selectedFilm.characters ? await fetchCharacters(selectedFilm.characters) : [];?
+          const data = selectedFilm.characters ? await fetchCharacters(selectedFilm.characters) : [];
+
           dispatch(setCharacters(data));
         }
       };
   
       fetchData();
-    }, [selectedStarWars, dispatch]);
+    }, [selectedFilm, dispatch]);
   
     return (
       <div>
