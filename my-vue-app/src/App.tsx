@@ -11,6 +11,7 @@ import { useProgress } from './ProgressContext';
 import ProgressBar from './ProgressBar';
 import { StarshipComponent, CharacterComponent, FilmComponent, PlanetComponent } from "./StarWarsComponets";
 import StarWarsParentComponent from "./StarWarsParentComponent";
+import { fetchCharacters } from "./fetchComponets";
 
 
 
@@ -20,6 +21,7 @@ function App() {
   const planets = useSelector((state: RootState) => state.starship.planets);
   const characters = useSelector((state: RootState) => state.starship.characters);
   const films = useSelector((state: RootState) => state.starship.films);
+  const selectedfilm= useSelector((state: RootState) => state.starship.selectedFilm);
   const { progress, setProgress } = useProgress();
 
   const initialModeller: Modeller[] = [
@@ -71,21 +73,36 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-
-
-      var filmsData=  await fetchFilms();
-
-
+        const filmsData = await fetchFilms();
         dispatch(setFilms(filmsData));
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setProgress(100); 
+        setProgress(100);
       }
     };
 
     fetchData();
   }, []);
+
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (selectedfilm) {
+        // Fetch characters or other data based on selectedFilm
+        // For example:
+
+           const data = selectedfilm.characters ? await fetchCharacters(selectedfilm.characters) : [];
+        
+                  dispatch(setCharacters(data));
+
+        
+      }
+    };
+
+    fetchData();
+  }, [selectedfilm]);
 
   return (
     <div style={{ padding: "20px" }}>
