@@ -25,10 +25,9 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
   );
 
   export const CharacterComponent: React.FC<{ entity: Characters[] }> = ({ entity }) => {
-    const dispatch = useDispatch();
-    const selectedFilm = useSelector((state: RootState) => state.starship.selectedFilm);
+  
 
-    useEffect(() => {
+   /*  useEffect(() => {
       const fetchData = async () => {
         if (selectedFilm) {
           const data = selectedFilm.characters ? await fetchCharacters(selectedFilm.characters) : [];
@@ -38,7 +37,7 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
       };
   
       fetchData();
-    }, [selectedFilm]);
+    }, [selectedFilm, dispatch]); */
   
     return (
       <table>
@@ -47,7 +46,7 @@ export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
         <tr key={index}   >
           <td>Birth year:{item.birth_year}</td>
           <td>
-            <span>Homeworld: {item.homeworld}</span>
+            <span>Eyecolor: {item.eye_color}</span>
           </td>
         </tr>
       ))}
@@ -64,6 +63,7 @@ const selectedFilm = useSelector((state: RootState) => state.starship.selectedFi
 
     const handleOnClick = (film: Film) => {
       dispatch(setSelectedFilm(film))
+
     }
 
     return(
@@ -74,6 +74,7 @@ const selectedFilm = useSelector((state: RootState) => state.starship.selectedFi
           selectedFilm && selectedFilm.title === item.title ? "highlighted" : ""
         }>
           <td>{item.title}</td>
+
           <td>
             <span>Director: {item.producer}</span>
           </td>
