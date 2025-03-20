@@ -17,12 +17,22 @@ export const StarshipComponent: React.FC<{ entity: Starship }> = ({ entity }) =>
   );
 
 
-export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => (
-    <div>
-      <h1>Planet: {entity.Name}</h1>
-      <p>Climate: {entity.climate}</p>
-    </div>
+export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => {
+  return (
+    <table>
+    <tbody>
+    {entity.map((item: Planets, index: number) => (
+      <tr key={index}   >
+        <td>Birth year:{item.Name}</td>
+        <td>
+          <span>Eyecolor: {item.climate}</span>
+        </td>
+      </tr>
+    ))}
+</tbody>
+</table>
   );
+};
 
   export const CharacterComponent: React.FC<{ entity: Characters[] }> = ({ entity }) => {
   

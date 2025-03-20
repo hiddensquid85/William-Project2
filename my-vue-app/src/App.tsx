@@ -11,7 +11,7 @@ import { useProgress } from './ProgressContext';
 import ProgressBar from './ProgressBar';
 import { StarshipComponent, CharacterComponent, FilmComponent, PlanetComponent } from "./StarWarsComponets";
 import StarWarsParentComponent from "./StarWarsParentComponent";
-import { fetchCharacters } from "./fetchComponets";
+import { fetchCharacters, fetchPlanets } from "./fetchComponets";
 
 
 
@@ -94,8 +94,9 @@ function App() {
         // For example:
 
            const data = selectedfilm.characters ? await fetchCharacters(selectedfilm.characters) : [];
-        
+           const data2 = selectedfilm.planets ? await fetchPlanets(selectedfilm.planets) : [];
                   dispatch(setCharacters(data));
+                  dispatch(setPlanets(data2));
 
         
       }
