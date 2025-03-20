@@ -9,15 +9,15 @@ import './modelTable.css';
 
 
 
-export const StarshipComponent: React.FC<{ entity: Starship }> = ({ entity }) => (
+export const StarshipComponent: React.FC<{ entity: Starship[] }> = ({ entity }) => (
     <div>
-      <h1>Starship: {entity.name}</h1>
-      <p>Model: {entity.model}</p>
+     {/*  <h1>Starship: {entity.name}</h1>
+      <p>Model: {entity.model}</p> */}
     </div>
   );
 
 
-export const PlanetComponent: React.FC<{ entity: Planets }> = ({ entity }) => {
+export const PlanetComponent: React.FC<{ entity: Planets[] }> = ({ entity }) => {
   return (
     <table>
     <tbody>
