@@ -8,6 +8,7 @@ import './modelTable.css';
 
 
 
+
 export const StarshipComponent: React.FC<{ entity: Starship }> = ({ entity }) => (
     <div>
       <h1>Starship: {entity.name}</h1>
