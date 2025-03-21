@@ -36,19 +36,7 @@ export const PlanetComponent: React.FC<{ entity: Planets[] }> = ({ entity }) => 
 
   export const CharacterComponent: React.FC<{ entity: Characters[] }> = ({ entity }) => {
   
-
-   /*  useEffect(() => {
-      const fetchData = async () => {
-        if (selectedFilm) {
-          const data = selectedFilm.characters ? await fetchCharacters(selectedFilm.characters) : [];
-
-          dispatch(setCharacters(data));
-        }
-      };
-  
-      fetchData();
-    }, [selectedFilm, dispatch]); */
-  
+ 
     return (
       <table>
       <tbody>

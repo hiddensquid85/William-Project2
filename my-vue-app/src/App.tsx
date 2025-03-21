@@ -120,7 +120,7 @@ function App() {
         {/* Characters Section */}
         <div style={{ flex: 1 }}>
           <h2>Characters</h2>
-         { characters && <StarWarsParentComponent entity={characters}/> }
+         { characters && <CharacterComponent entity={[]}  /> }
         </div>
       </div>
 

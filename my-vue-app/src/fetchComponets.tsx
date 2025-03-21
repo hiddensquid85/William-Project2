@@ -35,7 +35,7 @@ export async function fetchCharacters(urls: string[]): Promise<Characters[]> {
   
       const planets = await Promise.all(planetPromises);
 
-      planets[0].type = "Planets";
+      planets[1].type = "Planets";
       return planets;
     } catch (error) {
       console.error("Error fetching planets:", error);
