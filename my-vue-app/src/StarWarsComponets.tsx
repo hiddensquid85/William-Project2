@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { Planets,Characters,Film , Starship} from "./commontypes";
 import { useDispatch,useSelector } from "react-redux";
 import { RootState } from "./store";
-import { setCharacters, setSelectedFilm } from "./starshipSlice";
+import { setCharacters, setFilms, setSelectedFilm } from "./starshipSlice";
 import { fetchCharacters } from "./fetchComponets";
 import './modelTable.css';
+import axiosInstance from "./axiosInstance";
 
 
 
@@ -34,28 +35,80 @@ export const PlanetComponent: React.FC<{ entity: Planets[] }> = ({ entity }) => 
   );
 };
 
-  export const CharacterComponent: React.FC<{ entity: Characters[] }> = ({ entity }) => {
-  
- 
-    return (
-      <table>
-      <tbody>
-      {entity.map((item: Characters, index: number) => (
-        <tr key={index}   >
-          <td>Birth year:{item.birth_year}</td>
-          <td>
-            <span>Eyecolor: {item.eye_color}</span>
-          </td>
-        </tr>
-      ))}
-  </tbody>
-</table>
-    );
-  };
 
-  export const FilmComponent: React.FC<{ entity: Film[] }> = ({ entity }) => {
+export const CharacterComponent: React.FC = () => {
+  const dispatch = useDispatch();
+  const characters = useSelector((state: RootState) => state.starship.characters);
+  const selectedFilm = useSelector((state: RootState) => state.starship.selectedFilm);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (selectedFilm) {
+        const data = selectedFilm.characters ? await fetchCharacters(selectedFilm.characters) : [];
+
+        dispatch(setCharacters(data));
+       
+      }
+    };
+
+    fetchData();
+  }, [selectedFilm]); // Add selectedFilm as a dependency
+
+  return (
+    <table>
+      <tbody>
+        {characters.map((item: Characters, index: number) => (
+          <tr key={index}>
+            <td>Birth year: {item.birth_year}</td>
+            <td>
+              <span>Eye color: {item.eye_color}</span>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+  export const FilmComponent: React.FC = () => {
+
+    
+  async function fetchFilms(): Promise<Film[]> {
+    try {
+      const response = await axiosInstance.get('https://swapi.dev/api/films/', {
+
+      });
+      
+      const data: Film[] = await response.data.results as Film[];
+      data[0].type = "Film";
+
+      return data;
+    }
+     catch (error) {
+      console.error('Error fetching films:', error);
+      return [];
+    }
+  }
+
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const filmsData = await fetchFilms();
+          dispatch(setFilms(filmsData));
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        } finally {
+          setProgress(100);
+        }
+      };
+  
+      fetchData();
+    }, []);
 
     const dispatch = useDispatch();
+    
+const Films = useSelector((state: RootState) => state.starship.films);
 const selectedFilm = useSelector((state: RootState) => state.starship.selectedFilm);
 
 
@@ -67,7 +120,7 @@ const selectedFilm = useSelector((state: RootState) => state.starship.selectedFi
     return(
     <table>
       <tbody>
-      {entity.map((item: Film, index: number) => (
+      {Films && Films.map((item: Film, index: number) => (
         <tr key={index} onClick={() => handleOnClick(item)}  className={
           selectedFilm && selectedFilm.title === item.title ? "highlighted" : ""
         }>
@@ -83,36 +136,9 @@ const selectedFilm = useSelector((state: RootState) => state.starship.selectedFi
   );
   };
 
-  /*   
-              {entity.map((item, index) => {
-                      
 
-                       /*   const setSelectedFilm = (item: Film) => setSelectedStarWars(item); */
-             
-                       /*   return (
-                           <tr
-                             key={index}
-                             onClick={() => dispatch(setSelectedStarWars(item))}
-                             className={selectedStarWars && isFilm(selectedStarWars) && selectedStarWars.title === item.title ? "highlighted" : ""}
-
-                           >
-                             <td>{item.title}</td>
-                             <td>
-                               <span>Director: {item.producer}</span>
-                             </td>
-                           </tr>
-                         );
-                       } else {
-                         return null; */
-                   /*     } */ 
-                     
-              
-/* 
-    <div>
-      <h1>Film: {entity.title}</h1>
-      <p>Director: {entity.director}</p>
-      <p>Producer: {entity.producer}</p>
-    </div> */
+function setProgress(arg0: number) {
+ 
+}
   
-
  

@@ -53,57 +53,10 @@ function App() {
  
 
 
-  async function fetchFilms(): Promise<Film[]> {
-    try {
-      const response = await axiosInstance.get('https://swapi.dev/api/films/', {
-
-      });
-      
-      const data: Film[] = await response.data.results as Film[];
-      data[0].type = "Film";
-
-      return data;
-    }
-     catch (error) {
-      console.error('Error fetching films:', error);
-      return [];
-    }
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const filmsData = await fetchFilms();
-        dispatch(setFilms(filmsData));
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setProgress(100);
-      }
-    };
-
-    fetchData();
-  }, []);
+  
 
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (selectedfilm) {
-        // Fetch characters or other data based on selectedFilm
-        // For example:
-
-           const data = selectedfilm.characters ? await fetchCharacters(selectedfilm.characters) : [];
-           const data2 = selectedfilm.planets ? await fetchPlanets(selectedfilm.planets) : [];
-                  dispatch(setCharacters(data));
-                  dispatch(setPlanets(data2));
-
-        
-      }
-    };
-
-    fetchData();
-  }, [selectedfilm]);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -114,13 +67,13 @@ function App() {
         {/* Films Section */}
         <div style={{ flex: 1 }}>
           <h2>Films</h2>
-          {films && <StarWarsParentComponent entity={films} />}
+          {<FilmComponent />}
         </div>
 
         {/* Characters Section */}
         <div style={{ flex: 1 }}>
           <h2>Characters</h2>
-         { characters && <CharacterComponent entity={[]}  /> }
+         {  <CharacterComponent   /> }
         </div>
       </div>
 
