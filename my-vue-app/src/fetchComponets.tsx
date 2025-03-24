@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosInstance";
-import { Characters, Planets } from "./commontypes";
+import { Characters, Planets, Starship } from "./commontypes";
 
 
 
@@ -35,10 +35,30 @@ export async function fetchCharacters(urls: string[]): Promise<Characters[]> {
   
       const planets = await Promise.all(planetPromises);
 
-      planets[1].type = "Planets";
+      planets[0].type = "Planets";
       return planets;
     } catch (error) {
       console.error("Error fetching planets:", error);
+      return [];
+    }
+  }
+
+  export async function fetchStarships(urls: string[]): Promise<Starship[]> {
+    try {
+      const StarshipPromises = urls.map(async (url) => {
+        const response = await axiosInstance.get(url);
+
+
+
+        return response.data as Starship;
+      });
+  
+      const Starship = await Promise.all(StarshipPromises);
+
+       Starship[0].type = "Starship";
+      return Starship;
+    } catch (error) {
+      console.error("Error fetching Starship:", error);
       return [];
     }
   }

@@ -10,30 +10,31 @@ import axiosInstance from "./axiosInstance";
 
 
 
-export const StarshipComponent: React.FC<{ entity: Starship[] }> = ({ entity }) => (
-    <div>
-     {/*  <h1>Starship: {entity.name}</h1>
-      <p>Model: {entity.model}</p> */}
-    </div>
-  );
+
+// export const StarshipComponent: React.FC<{ entity: Starship[] }> = ({ entity }) => (
+//     <div>
+//      {/*  <h1>Starship: {entity.name}</h1>
+//       <p>Model: {entity.model}</p> */}
+//     </div>
+//   );
 
 
-export const PlanetComponent: React.FC<{ entity: Planets[] }> = ({ entity }) => {
-  return (
-    <table>
-    <tbody>
-    {entity.map((item: Planets, index: number) => (
-      <tr key={index}   >
-        <td>Birth year:{item.Name}</td>
-        <td>
-          <span>Eyecolor: {item.climate}</span>
-        </td>
-      </tr>
-    ))}
-</tbody>
-</table>
-  );
-};
+// export const PlanetComponent: React.FC<{ entity: Planets[] }> = ({ entity }) => {
+//   return (
+//     <table>
+//     <tbody>
+//     {entity.map((item: Planets, index: number) => (
+//       <tr key={index}   >
+//         <td>Birth year:{item.Name}</td>
+//         <td>
+//           <span>Eyecolor: {item.climate}</span>
+//         </td>
+//       </tr>
+//     ))}
+// </tbody>
+// </table>
+//   );
+// };
 
 
 export const CharacterComponent: React.FC = () => {

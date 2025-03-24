@@ -6,12 +6,15 @@ import { setStarship, setPlanets, setCharacters, setFilms } from './starshipSlic
 import { RootState } from './store';
 import ModelDetail from "./ModelDetail";
 import { StarWarsEntity, Characters, Film, Planets, Starship, Modeller } from "./commontypes";
-import StarWarsComponent from "./StarWarsParentComponent";
+
 import { useProgress } from './ProgressContext';
 import ProgressBar from './ProgressBar';
-import { StarshipComponent, CharacterComponent, FilmComponent, PlanetComponent } from "./StarWarsComponets";
+
 import StarWarsParentComponent from "./StarWarsParentComponent";
 import { fetchCharacters, fetchPlanets } from "./fetchComponets";
+import { FilmComponent } from "./StarWarsComponets1.tsx/FilmComponet";
+import { CharacterComponent } from "./StarWarsComponets1.tsx/CharacterComponet";
+import { PlanetComponent } from "./StarWarsComponets1.tsx/PlanetComponet";
 
 
 
@@ -81,7 +84,7 @@ function App() {
         {/* Planets Section */}
         <div style={{ flex: 1 }}>
           <h2>Planets</h2>
-        {/*   <StarWarsComponent entity={}/> */}
+        {   <PlanetComponent />}
         </div>
 
         {/* Starships Section */}
