@@ -19,6 +19,7 @@ import { StarShipsComponent } from "./StarWarsComponets1.tsx/StarShipComponet";
 import SecondPage from "./sidor/sida1";
 import CharacterStarWars from './sidor/sida2';
 import CharacterPage from "./sidor/sida2";
+import Home from "./home";
 
 
 
@@ -111,7 +112,7 @@ function App() {
     // </div>
 
   <div>
-  <SecondPage />
+  <Home />
 
   </div>
   
