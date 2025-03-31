@@ -16,6 +16,9 @@ import { FilmComponent } from "./StarWarsComponets1.tsx/FilmComponet";
 import { CharacterComponent } from "./StarWarsComponets1.tsx/CharacterComponet";
 import { PlanetComponent } from "./StarWarsComponets1.tsx/PlanetComponet";
 import { StarShipsComponent } from "./StarWarsComponets1.tsx/StarShipComponet";
+import SecondPage from "./sidor/sida1";
+import CharacterStarWars from './sidor/sida2';
+import CharacterPage from "./sidor/sida2";
 
 
 
@@ -107,8 +110,11 @@ function App() {
     //   </div>
     // </div>
 
-  <div></div>
+  <div>
+  <SecondPage />
 
+  </div>
+  
   );
 }
 
