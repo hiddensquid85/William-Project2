@@ -15,6 +15,10 @@ import { fetchCharacters, fetchPlanets } from "./fetchComponets";
 import { FilmComponent } from "./StarWarsComponets1.tsx/FilmComponet";
 import { CharacterComponent } from "./StarWarsComponets1.tsx/CharacterComponet";
 import { PlanetComponent } from "./StarWarsComponets1.tsx/PlanetComponet";
+import { StarShipsComponent } from "./StarWarsComponets1.tsx/StarShipComponet";
+
+
+
 
 
 
@@ -53,6 +57,8 @@ function App() {
     }
   }
 
+  
+
  
 
 
@@ -62,44 +68,47 @@ function App() {
 
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Star Wars Universe</h1>
-      {progress < 100 && <ProgressBar progress={progress} />}
+    // <div style={{ padding: "20px" }}>
+    //   <h1>Star Wars Universe</h1>
+    //   {progress < 100 && <ProgressBar progress={progress} />}
 
-      <div style={{ display: "flex", gap: "20px" }}>
-        {/* Films Section */}
-        <div style={{ flex: 1 }}>
-          <h2>Films</h2>
-          {<FilmComponent />}
-        </div>
+    //   <div style={{ display: "flex", gap: "20px" }}>
+    //     {/* Films Section */}
+    //     <div style={{ flex: 1 }}>
+    //       <h2>Films</h2>
+    //       {<FilmComponent />}
+    //     </div>
 
-        {/* Characters Section */}
-        <div style={{ flex: 1 }}>
-          <h2>Characters</h2>
-         {  <CharacterComponent   /> }
-        </div>
-      </div>
+    //     {/* Characters Section */}
+    //     <div style={{ flex: 1 }}>
+    //       <h2>Characters</h2>
+    //      {  <CharacterComponent   /> }
+    //     </div>
+    //   </div>
 
-      <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
-        {/* Planets Section */}
-        <div style={{ flex: 1 }}>
-          <h2>Planets</h2>
-        {   <PlanetComponent />}
-        </div>
+    //   <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+    //     {/* Planets Section */}
+    //     <div style={{ flex: 1 }}>
+    //       <h2>Planets</h2>
+    //     {   <PlanetComponent />}
+    //     </div>
 
-        {/* Starships Section */}
-        <div style={{ flex: 1 }}>
-          <h2>Starships</h2>
-       {/*    <StarWarsComponent entity={}/> */}
-        </div>
-      </div>
+    //     {/* Starships Section */}
+    //     <div style={{ flex: 1 }}>
+    //       <h2>Starships</h2>
+    //    {<StarShipsComponent />}
+    //     </div>
+    //   </div>
 
-      {/* Detailed Info Section */}
-      <div style={{ marginTop: "20px" }}>
-        <h2>Detailed Info</h2>
-        <ModelDetail />
-      </div>
-    </div>
+    //   {/* Detailed Info Section */}
+    //   <div style={{ marginTop: "20px" }}>
+    //     <h2>Detailed Info</h2>
+    //     <ModelDetail />
+    //   </div>
+    // </div>
+
+  <div></div>
+
   );
 }
 

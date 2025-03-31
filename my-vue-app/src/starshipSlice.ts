@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Characters, Film, Modeller, Planets } from "./commontypes";
+import { Characters, Film, Modeller, Planets, Starship } from "./commontypes";
 
 interface StarWarsState {
-    starships: Modeller[];
+    starships: Starship[];
     planets: Planets[];
     characters: Characters[];
     films: Film[] | null;
@@ -27,7 +27,7 @@ interface StarWarsState {
     name: 'starship',
     initialState,
     reducers: {
-      setStarship: (state, action: PayloadAction<Modeller[]>) => {
+      setStarship: (state, action: PayloadAction<Starship[]>) => {
         state.starships = action.payload;
       },
       setPlanets: (state, action: PayloadAction<Planets[]>) => {
